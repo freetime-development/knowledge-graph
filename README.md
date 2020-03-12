@@ -1,2 +1,2 @@
 # knowledge-graph
-Server for storing graph data from Archive plugin
+Application layer for storing and visualizing graph data from Archive
