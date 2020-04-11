@@ -1,5 +1,5 @@
 import { hot } from 'react-hot-loader/root'
-import React, { FunctionComponent, useEffect } from 'react'
+import React, { PureComponent, useEffect } from 'react'
 import { withRouter, RouteComponentProps, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 
@@ -8,16 +8,24 @@ import { rootAction } from '../actions/rootActions'
 
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps & RouteComponentProps
 
-const App: FunctionComponent<Props> = ({ rootAction, root }) => {
-  useEffect(() => {
-    rootAction('something')
-  }, [root])
+class App extends PureComponent<Props> {
+  constructor(props: Props) {
+    super(props)
+  }
 
-  return (
-    <Route path='/' exact={true}>
-      {root}
-    </Route>
-  )
+  componentDidMount() {
+    this.props.rootAction("something")
+  }
+
+  render() {
+    return (
+      <Route path='/' exact={true}>
+        <>
+          {this.props.root}
+        </>
+      </Route>
+    )
+  }
 }
 
 const mapStateToProps = (
