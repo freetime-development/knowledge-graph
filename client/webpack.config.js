@@ -58,6 +58,6 @@ module.exports = {
     hot: true,
     // Use host 0.0.0.0 for Docker
     host: process.env.HOST, // Defaults to `localhost`
-    port: process.env.PORT, // Defaults to 8080
+    port: 2000, // Defaults to 8080
   },
 };
