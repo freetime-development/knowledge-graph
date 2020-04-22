@@ -22,7 +22,12 @@ module.exports = {
                 test: /\.tsx?$/,
                 use: [
                     {
-                        loader: "awesome-typescript-loader"
+                        loader: "awesome-typescript-loader",
+                        options : {
+                            reportFiles: [
+                                'src/**/*'
+                            ]
+                        }
                     }
                 ]
             }
