@@ -5,7 +5,7 @@ import { Message } from '../../util'
 
 interface Options {
   address: string
-  credentials: grpc.ChannelCredentials
+  credentials: any // TODO add correct type when we know what secure channel we gonna use
 }
 
 class NodeRepository {
