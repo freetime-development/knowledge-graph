@@ -7,6 +7,7 @@
         "removeComments": false,
         "preserveConstEnums": true,
         "strictNullChecks": false,
+        "esModuleInterop": true,
         "experimentalDecorators": true,
         "target": "es2017",
         "lib": [
