@@ -1,10 +1,13 @@
 import { hot } from 'react-hot-loader/root'
-import React, { PureComponent, useEffect } from 'react'
+import React, { PureComponent } from 'react'
 import { withRouter, RouteComponentProps, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { RootState } from '../reducers/rootReducer'
-import { rootAction } from '../actions/rootActions'
+import { RootState } from '../reducers/nodeReducer'
+import { loadNodesByTopic } from '../actions/nodeActions'
+import Node from './Node/Node'
+import { list } from '../utils'
+import './app.css'
 
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps & RouteComponentProps
 
@@ -14,14 +17,25 @@ class App extends PureComponent<Props> {
   }
 
   componentDidMount() {
-    this.props.rootAction("something")
+    this.props.loadNodesByTopic("blender")
   }
 
   render() {
     return (
       <Route path='/' exact={true}>
         <>
-          {this.props.root}
+          <div className="nodes">
+            {list(this.props.nodes, (node) =>
+              <Node
+                key={node.uid}
+                data={node}
+                onSave={() => {}}
+                onDiscard={() => {}}
+                onAnnotate={() => {}}
+                onTopic={() => {}}
+              />
+            )}
+          </div>
         </>
       </Route>
     )
@@ -31,11 +45,11 @@ class App extends PureComponent<Props> {
 const mapStateToProps = (
   state: RootState
 ) => ({
-  root: state.root
+  nodes: state.nodes
 })
 
 const mapDispatchToProps = {
-  rootAction
+  loadNodesByTopic
 }
 
 const component = process.env.NODE_ENV === 'development' ? hot(App) : App

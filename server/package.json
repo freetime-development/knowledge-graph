@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack --config=webpack.config.js",
+    "dev": "webpack --config=webpack.config.js",
     "test": "NODE_ENV=test mocha --require ts-node/register 'src/**/*.test.ts'",
     "test:watch": "NODE_ENV=test mocha --watch --require ts-node/register 'src/**/*.test.ts'"
   },

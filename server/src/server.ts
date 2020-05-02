@@ -27,7 +27,7 @@ const nodeController = new NodeController(nodeRepository)
 app.use(paths.nodes, nodeRouter(nodeController))
 
 // Handle undefined routes
-app.use("/", (_, res) => {
+app.use("*", (_, res) => {
   res.send('Hello from root')
 })
 
