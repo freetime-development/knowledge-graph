@@ -13,8 +13,12 @@ while [ $# -gt 0 ]; do
 
   shift
 done
-cp ${data_file/\/dgraph\//} server1 && cp ${schema_file/\/dgraph\//} server1
+if [ ! -d server1 ]; then
+    mkdir server1
+fi
+cp ${data_file/\/dgraph\//} server1/ && cp ${schema_file/\/dgraph\//} server1/
 docker exec -it $container_name dgraph bulk -f $data_file -s $schema_file --map_shards=1 --reduce_shards=1 --http localhost:8001 --zero=zero:5080 
 docker exec -it $container_name rm -rf /dgraph/p
 docker exec -it $container_name mv /dgraph/out/0/p /dgraph/p
 docker exec -it $container_name rm -rf /dgraph/out
+rm server1/g01*
