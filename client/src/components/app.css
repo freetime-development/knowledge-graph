@@ -1,0 +1,9 @@
+body {
+    background: rgba(25, 25, 25, 1)
+}
+
+.nodes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

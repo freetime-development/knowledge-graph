@@ -6,11 +6,11 @@ import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
-import rootReducer from './reducers/rootReducer'
+import nodeReducer from './reducers/nodeReducer'
 import App from './components/App'
 
 const store = createStore(
-  rootReducer,
+  nodeReducer,
   process.env.NODE_ENV === 'development' ? composeWithDevTools(applyMiddleware(thunkMiddleware)) : undefined
 )
 
