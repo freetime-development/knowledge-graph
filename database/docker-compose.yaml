@@ -1,0 +1,38 @@
+version: "3.4" 
+services: 
+  alpha1: 
+    command: "dgraph alpha --whitelist 172.16.0.1 --lru_mb=1024 --zero=zero:5080 --my=alpha1:7080"
+    container_name: alpha1
+    image: "dgraph/dgraph:latest"
+    networks: 
+      - dgraph_default
+    ports: 
+      - "7080:7080"
+      - "8080:8080"
+      - "9080:9080"
+    volumes: 
+      - "./server1:/dgraph"
+  ratel: 
+    command: dgraph-ratel
+    container_name: ratel
+    image: "dgraph/dgraph:latest"
+    networks: 
+      - dgraph_default
+    ports: 
+      - "8000:8000"
+  zero: 
+    command: "dgraph zero --my=zero:5080"
+    container_name: zero
+    image: "dgraph/dgraph:latest"
+    networks: 
+      - dgraph_default
+    ports: 
+      - "5080:5080"
+      - "6080:6080"
+    volumes: 
+      - "./zero:/dgraph"
+networks:
+ dgraph_default:
+  ipam:
+   config:
+    - subnet: 172.16.0.0/24
