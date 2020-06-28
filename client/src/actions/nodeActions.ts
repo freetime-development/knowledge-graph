@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from 'axios'
 import { ThunkAction } from 'redux-thunk'
-import { RootState } from '../reducers/nodeReducer'
+import { NodeState } from '../reducers/nodeReducer'
 import { Action } from 'redux'
-import { host, loadNodesByTopicPath } from '../conf'
+import { host, ApiRoutes } from '../conf'
 import { NodeResponse, Node } from '../interface'
 
 const request = axios.create({
@@ -45,10 +45,10 @@ export const loadNodesByTopicError = (error: string): LoadNodesByTopicError => (
   error
 })
 
-type LoadNodesByTopicThunkAction = ThunkAction<void, RootState, any, Action<any>>
+type LoadNodesByTopicThunkAction = ThunkAction<void, NodeState, any, Action<any>>
 
 export const loadNodesByTopic = (topic: string): LoadNodesByTopicThunkAction => (dispatch) => {
-  request.get(`${loadNodesByTopicPath}/${topic}`).then((response: AxiosResponse<NodeResponse>) => {
+  request.get(`${ApiRoutes.LOAD_NODES_BY_TOPIC}/${topic}`).then((response: AxiosResponse<NodeResponse>) => {
     if (response.status === 200) {
       const nodes: NodeResponse = response.data
       dispatch(loadNodesByTopicSuccess(nodes.payload))

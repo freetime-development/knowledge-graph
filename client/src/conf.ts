@@ -1,4 +1,11 @@
 export const host = 'http://localhost:4000'
 
-// Routes
-export const loadNodesByTopicPath = '/node'
+// Api Routes
+export enum ApiRoutes {
+  LOAD_NODES_BY_TOPIC = '/node'
+}
+
+export enum Routes {
+  ROOT = '/',
+  NOTE = '/note'
+}

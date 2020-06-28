@@ -1,3 +1,11 @@
+import { NodeState } from './reducers/nodeReducer'
+import { UIState } from './reducers/UIReducer';
+
+export interface RootState {
+  node: NodeState
+  ui: UIState
+}
+
 export interface NodeResponse {
   success: boolean
   payload: Node[]

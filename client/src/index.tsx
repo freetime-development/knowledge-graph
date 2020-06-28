@@ -1,23 +1,39 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, combineReducers } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
+import { Routes } from './conf'
+import Sidebar from './components/Sidebar/Sidebar'
+import App from './pages/App/App'
+import Note from './pages/Note/Note'
+
 import nodeReducer from './reducers/nodeReducer'
-import App from './components/App'
+import UIReducer from './reducers/UIReducer'
+
+
+const reducers = combineReducers({
+  node: nodeReducer,
+  ui: UIReducer
+})
 
 const store = createStore(
-  nodeReducer,
+  reducers,
   process.env.NODE_ENV === 'development' ? composeWithDevTools(applyMiddleware(thunkMiddleware)) : undefined
 )
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App/>
+      <Sidebar />
+      <Switch>
+        <Route path={Routes.ROOT} exact component={App} />
+        <Route path={Routes.NOTE} exact component={Note} />
+        <Redirect to={Routes.ROOT} />
+      </Switch>
     </BrowserRouter>
   </Provider>,
   document.getElementById('app')
