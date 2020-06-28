@@ -2,15 +2,21 @@
   width: 320px;
   margin: 10px;
   box-shadow: -5px -5px 5px 0 rgba(35,35,35,1), 5px 5px 5px 0 rgba(0,0,0,.3);
+  box-shadow: -5px -5px 5px 0 rgba(255,255,255,.3), 5px 5px 5px 0 rgba(235,235,235,1);
   border-radius: .5em;
   padding: 7px;
 }
 
 .content-node .title {
-  color: whitesmoke;
-  height: 40px;
+  /* color: whitesmoke; */
+  padding-bottom: 7px;
 }
 
 .content-node h4 {
   margin: 0;
+}
+
+.content-node img {
+  width: 200px;
+  height: 120px;
 }

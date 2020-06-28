@@ -1,31 +1,29 @@
 import { hot } from 'react-hot-loader/root'
-import React, { PureComponent } from 'react'
-import { withRouter, RouteComponentProps, Route } from 'react-router-dom'
+import React, { FunctionComponent, useEffect } from 'react'
+import { withRouter, RouteComponentProps, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import { RootState } from '../reducers/nodeReducer'
 import { loadNodesByTopic } from '../actions/nodeActions'
 import Node from './Node/Node'
 import { list } from '../utils'
+import Note from '../pages/Note/Note'
+
 import './app.css'
 
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps & RouteComponentProps
 
-class App extends PureComponent<Props> {
-  constructor (props: Props) {
-    super(props)
-  }
+const App: FunctionComponent<Props> = ({ loadNodesByTopic, nodes }) => {
+  useEffect(() => {
+    loadNodesByTopic("blender")
+  }, [])
 
-  componentDidMount () {
-    this.props.loadNodesByTopic('blender')
-  }
-
-  render () {
-    return (
+  return (
+    <Switch>
       <Route path='/' exact={true}>
         <>
           <div className="nodes">
-            {list(this.props.nodes, (node) =>
+            {list(nodes, (node) =>
               <Node
                 key={node.uid}
                 data={node}
@@ -38,8 +36,9 @@ class App extends PureComponent<Props> {
           </div>
         </>
       </Route>
-    )
-  }
+      <Route path='/test' exact component={Note} />
+    </Switch>
+  )
 }
 
 const mapStateToProps = (
