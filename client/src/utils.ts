@@ -1,8 +1,8 @@
-export function list(array, cb) {
-    if (!array.length || !array) {
-        // report error
-        return []
-    }
+export function list (array, cb) {
+  if (!array.length || Array.isArray(array)) {
+    // report error
+    return []
+  }
 
-    return array.map(cb)
+  return array.map(cb)
 }

@@ -6,10 +6,13 @@ module.exports = {
   mode: 'development',
   devtool: 'source-map',
   resolve: {
-      extensions: ['.ts', '.tsx', '.js', '.jsx'],
-      alias: {
-        'react-dom': '@hot-loader/react-dom'
-      }
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    alias: {
+      'react-dom': '@hot-loader/react-dom'
+    }
+  },
+  output: {
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -34,8 +37,24 @@ module.exports = {
               '@babel/preset-react'
             ],
             plugins: [
+              ['@babel/plugin-proposal-decorators', { legacy: true }],
+              '@babel/plugin-proposal-optional-chaining',
+              '@babel/plugin-transform-runtime',
               'react-hot-loader/babel',
-              'transform-class-properties'
+              'transform-class-properties',
+              [
+                'babel-plugin-transform-imports',
+                {
+                  '@material-ui/core': {
+                    transform: '@material-ui/core/esm/${member}',
+                    preventFullImport: true
+                  },
+                  '@material-ui/icons': {
+                    transform: '@material-ui/icons/esm/${member}',
+                    preventFullImport: true
+                  }
+                }
+              ]
             ]
           }
         }
@@ -62,6 +81,6 @@ module.exports = {
     hot: true,
     // Use host 0.0.0.0 for Docker
     host: process.env.HOST, // Defaults to `localhost`
-    port: 2000, // Defaults to 8080
-  },
-};
+    port: 2000 || process.env.PORT // Defaults to 8080
+  }
+}

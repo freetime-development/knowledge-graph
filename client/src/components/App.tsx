@@ -12,15 +12,15 @@ import './app.css'
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps & RouteComponentProps
 
 class App extends PureComponent<Props> {
-  constructor(props: Props) {
+  constructor (props: Props) {
     super(props)
   }
 
-  componentDidMount() {
-    this.props.loadNodesByTopic("blender")
+  componentDidMount () {
+    this.props.loadNodesByTopic('blender')
   }
 
-  render() {
+  render () {
     return (
       <Route path='/' exact={true}>
         <>

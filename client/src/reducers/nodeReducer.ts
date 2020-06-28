@@ -2,7 +2,7 @@ import { NodeActions, NodeTypeKeys } from '../actions/nodeActions'
 import { Node } from '../interface'
 
 export interface RootState {
-  nodes: Node[],
+  nodes: Node[]
   error: string
 }
 

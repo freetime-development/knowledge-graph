@@ -3,12 +3,14 @@
         "jsx": "react",
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
+        "experimentalDecorators": true,
         "lib": ["es2015", "dom"]
     },
     "include": [
         "src/**/*"
     ],
     "exclude": [
-        "node_modules"
+      "node_modules",
+      "dist"
     ]
 }

@@ -53,9 +53,9 @@ export const loadNodesByTopic = (topic: string): LoadNodesByTopicThunkAction => 
       const nodes: NodeResponse = response.data
       dispatch(loadNodesByTopicSuccess(nodes.payload))
     } else {
-      dispatch(loadNodesByTopicError("error"))
+      dispatch(loadNodesByTopicError('error'))
     }
   }).catch(_ => {
-    dispatch(loadNodesByTopicError("error"))
+    dispatch(loadNodesByTopicError('error'))
   })
 }
