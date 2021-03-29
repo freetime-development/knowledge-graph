@@ -1,8 +1,8 @@
 const httpMocks = require('node-mocks-http')
 
-export class Message {
+export class Message<P> {
     public success: boolean
-    public payload
+    public payload: P
 
     constructor(success?: boolean, payload?) {
         this.success = success || false

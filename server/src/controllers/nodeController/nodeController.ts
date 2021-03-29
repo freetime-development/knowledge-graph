@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import { Node } from '../../interface'
 import NodeRepository from '../../repositories/nodeRepository/nodeRepository'
 import { Message } from '../../util'
 
@@ -11,11 +12,11 @@ class NodeController {
 
   getNodesByTopic = async (req: Request, res: Response) => {
     const topic = decodeURIComponent(req.params.topic)
-    const result: Message = await this.nodeRepository.getByTopic(topic)
+    const result: Message<Node[]> = await this.nodeRepository.getByTopic(topic)
 
     return res.json(result)
 	}
-	
+
   setNode = async (req: Request, res: Response) => {
     const nodeData = {
       ...req.body,
@@ -23,13 +24,13 @@ class NodeController {
     }
     delete nodeData['type']
 
-    const result: Message = await this.nodeRepository.set(nodeData)
+    const result: Message<null> = await this.nodeRepository.set(nodeData)
     return res.json(result)
   }
 
   deleteNode = async (req: Request, res: Response) => {
     const uid = req.params.uid
-    const result: Message = await this.nodeRepository.delete(uid)
+    const result: Message<null> = await this.nodeRepository.delete(uid)
     return res.json(result)
   }
 }

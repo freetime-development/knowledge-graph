@@ -18,8 +18,8 @@ class NodeRepository {
     this.client = new dgraph.DgraphClient(clientStub)
   }
 
-  async getByTopic(topic: string): Promise<Message> {
-    const message: Message = new Message()
+  async getByTopic(topic: string): Promise<Message<Node[]>> {
+    const message: Message<Node[]> = new Message()
     const txn = this.client.newTxn()
     const query = `
       query byTopic($topic: string) {
@@ -41,7 +41,7 @@ class NodeRepository {
       const vars = { $topic: topic }
       const res = await txn.queryWithVars(query, vars)
       const result: Node[] = res.getJson()['byTopic']
-  
+
       message.setResult(result)
     } catch(error) {
       message.setError(error)
@@ -52,8 +52,8 @@ class NodeRepository {
     return message
   }
 
-  async set(nodeData: Node): Promise<Message> {
-    const message: Message = new Message()
+  async set(nodeData: Node): Promise<Message<null>> {
+    const message: Message<null> = new Message()
     const txn = this.client.newTxn()
     try {
       const mutation = new dgraph.Mutation()
@@ -74,8 +74,8 @@ class NodeRepository {
     return message
   }
 
-  async delete(uid: string): Promise<Message> {
-    const message: Message = new Message()
+  async delete(uid: string): Promise<Message<null>> {
+    const message: Message<null> = new Message()
     const txn = this.client.newTxn()
     try {
       const mutation = new dgraph.Mutation()
