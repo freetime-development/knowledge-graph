@@ -1,57 +1,34 @@
 import React, { FunctionComponent } from 'react'
-import { hot } from 'react-hot-loader/root'
-import clsx from 'clsx'
+import Drawer from '@material-ui/core/Drawer'
 
-import { Drawer } from '@material-ui/core'
+import styles from './sidebar.styles'
+import { Container } from '@material-ui/core'
 
-import { useStyles } from './siderbar.styles'
-import { connect } from 'react-redux'
-import { RootState } from '../../interface'
-import { withRouter, RouteComponentProps } from 'react-router-dom'
+interface Props {
+  width?: number
+  open: boolean
+  setOpen(open: boolean): void
+  children: JSX.Element[] | JSX.Element
+}
 
-const actions = [
-  'action1',
-  'action2'
-]
-
-type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps & RouteComponentProps
-
-
-const Sidebar: FunctionComponent<Props> = ({ isSidebarVisible }) => {
-  const classes = useStyles()
+const Sidebar: FunctionComponent<Props> = ({ open, setOpen, children, width }) => {
+  const classes = styles({ width })
 
   return (
     <Drawer
-      anchor="right"
-      variant="permanent"
-      className={clsx(classes.drawer, {
-        [classes.drawerOpen]: isSidebarVisible,
-        [classes.drawerClose]: !isSidebarVisible,
-      })}
-      classes={{
-        paper: clsx({
-          [classes.drawerOpen]: isSidebarVisible,
-          [classes.drawerClose]: !isSidebarVisible,
-        }),
-      }}
+      anchor='right'
+      open={open}
+      onClose={setOpen}
+      variant="persistent"
+      PaperProps={{ style: { top: '64px' } }}
     >
-      {actions.map((a) => a)}
+      <div className={classes.list} role="presentation">
+        <Container maxWidth="lg" className="page">
+          {children}
+        </Container>
+      </div>
     </Drawer>
   )
 }
 
-const mapStateToProps = (
-  state: RootState
-) => ({
-  isSidebarVisible: state.ui.isSidebarVisible
-})
-
-const mapDispatchToProps = {
-
-}
-
-const component = process.env.NODE_ENV === 'development' ? hot(Sidebar) : Sidebar
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(component)
-)
-
+export default Sidebar

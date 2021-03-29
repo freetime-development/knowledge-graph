@@ -1,36 +1,56 @@
-import React, { PureComponent } from 'react'
+import React, { FunctionComponent } from 'react'
 import { Node as INode } from '../../interface'
 import './node.css'
 
 interface Props {
+  tabIndex: number
   data: INode
+  addNote(node: INode): void
   onSave(node: INode)
   onDiscard(nodeuid: string)
   onAnnotate(nodeuid: string, data: string)
   onTopic(nodeuid: string, data: string)
 }
 
-class Node extends PureComponent<Props> {
-  render () {
-    const node = this.props.data
-    const thumbnail = `https://img.youtube.com/vi/${node.contentId}/mqdefault.jpg`
-    return (
-      <div className="content-node">
-        <div className="title">
-          <h4>{node.title}</h4>
-        </div>
-        <img src={thumbnail} />
+const Node:FunctionComponent<Props> = ({
+  tabIndex,
+  data,
+  addNote,
+  onSave,
+  onDiscard,
+  onAnnotate,
+  onTopic
+}) => {
+  const thumbnail = `https://img.youtube.com/vi/${data.contentId}/mqdefault.jpg`
+
+
+
+  // function onAnnotate (value: string) {
+  //   onAnnotate(data.uid, value)
+  // }
+
+  // function onTopic (value: string) {
+  //   onTopic(data.uid, value)
+  // }
+
+  function onEnter (e: React.KeyboardEvent<HTMLDivElement>) {
+    if (e.which === 13) {
+      addNote(data)
+    }
+  }
+
+  return (
+    <div
+      tabIndex={tabIndex}
+      className="content-node"
+      onKeyDown={onEnter}
+    >
+      <div className="title">
+        <h4>{data.title}</h4>
       </div>
-    )
-  }
-
-  onAnnotate = (value: string) => {
-    this.props.onAnnotate(this.props.data.uid, value)
-  }
-
-  onTopic = (value: string) => {
-    this.props.onTopic(this.props.data.uid, value)
-  }
+      <img src={thumbnail} />
+    </div>
+  )
 }
 
 export default Node

@@ -14,3 +14,8 @@
 .action-modal {
   position: absolute
 }
+
+canvas {
+  width: 100% !important;
+  height: 90vh !important
+}

@@ -9,3 +9,7 @@ export enum Routes {
   ROOT = '/',
   NOTE = '/note'
 }
+
+export const defaultApiConfig = {
+  baseURL: host
+}

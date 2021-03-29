@@ -3,7 +3,7 @@ import React, { FunctionComponent, useEffect } from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { loadNodesByTopic } from '../../actions/nodeActions'
+import { loadNodesByTopic } from '../../features/nodes/nodeReducer'
 import Node from '../../components/Node/Node'
 
 import './app.css'
@@ -19,10 +19,12 @@ const App: FunctionComponent<Props> = ({ loadNodesByTopic, nodes }) => {
 
   return (
     <div className="nodes">
-      {nodes.map((node) =>
+      {nodes.map((node, i) =>
         <Node
+          tabIndex={i + 1}
           key={node.uid}
           data={node}
+          addNote={null}
           onSave={() => {}}
           onDiscard={() => {}}
           onAnnotate={() => {}}
