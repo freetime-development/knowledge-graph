@@ -1,41 +1,20 @@
+import { observer } from 'mobx-react-lite'
 import React, { FunctionComponent } from 'react'
 import { Node as INode } from '../../interface'
 import './node.css'
-
 interface Props {
   tabIndex: number
   data: INode
-  addNote(node: INode): void
-  onSave(node: INode)
-  onDiscard(nodeuid: string)
-  onAnnotate(nodeuid: string, data: string)
-  onTopic(nodeuid: string, data: string)
 }
 
-const Node:FunctionComponent<Props> = ({
+const Node:FunctionComponent<Props> = observer(({
   tabIndex,
-  data,
-  addNote,
-  onSave,
-  onDiscard,
-  onAnnotate,
-  onTopic
+  data
 }) => {
   const thumbnail = `https://img.youtube.com/vi/${data.contentId}/mqdefault.jpg`
 
-
-
-  // function onAnnotate (value: string) {
-  //   onAnnotate(data.uid, value)
-  // }
-
-  // function onTopic (value: string) {
-  //   onTopic(data.uid, value)
-  // }
-
   function onEnter (e: React.KeyboardEvent<HTMLDivElement>) {
     if (e.which === 13) {
-      addNote(data)
     }
   }
 
@@ -51,6 +30,6 @@ const Node:FunctionComponent<Props> = ({
       <img src={thumbnail} />
     </div>
   )
-}
+})
 
 export default Node

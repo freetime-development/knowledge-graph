@@ -1,51 +1,46 @@
 import { hot } from 'react-hot-loader/root'
-import React, { FunctionComponent, useEffect } from 'react'
-import { withRouter, RouteComponentProps } from 'react-router-dom'
-import { connect } from 'react-redux'
+import React, { FunctionComponent, useEffect, useState } from 'react'
+import { observer } from 'mobx-react-lite'
+import { Backdrop, Button, CircularProgress } from '@material-ui/core'
 
-import { loadNodesByTopic } from '../../features/nodes/nodeReducer'
+import { useController } from '../../store'
 import Node from '../../components/Node/Node'
+import { States } from '../../stores/nodeStore'
 
 import './app.css'
-import { RootState } from '../../interface'
 
-type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps & RouteComponentProps
 
-const App: FunctionComponent<Props> = ({ loadNodesByTopic, nodes }) => {
-  console.log(nodes)
+const App: FunctionComponent<{}> = observer(() => {
+  const { nodeController } = useController()
+  const [{ cancel }, setCancel] = useState({ cancel: () => {} })
+
   useEffect(() => {
-    loadNodesByTopic("blender")
+      const cancel = nodeController.getNodesByTopic('blender')
+      setCancel({ cancel })
   }, [])
+
+  if (nodeController.store.state === States.LOADING) {
+    return (
+      <Backdrop open>
+        <CircularProgress />
+      </Backdrop>
+    )
+  }
 
   return (
     <div className="nodes">
-      {nodes.map((node, i) =>
+      <Button onClick={() => cancel()}>Cancel</Button>
+      {nodeController.store.nodes.map((node, i) =>
         <Node
           tabIndex={i + 1}
           key={node.uid}
           data={node}
-          addNote={null}
-          onSave={() => {}}
-          onDiscard={() => {}}
-          onAnnotate={() => {}}
-          onTopic={() => {}}
         />
       )}
     </div>
   )
-}
-
-const mapStateToProps = (
-  state: RootState
-) => ({
-  nodes: state.node.nodes
 })
 
-const mapDispatchToProps = {
-  loadNodesByTopic
-}
-
 const component = process.env.NODE_ENV === 'development' ? hot(App) : App
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(component)
-)
+
+export default component
