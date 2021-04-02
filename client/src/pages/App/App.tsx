@@ -15,8 +15,8 @@ const App: FunctionComponent<{}> = observer(() => {
   const [{ cancel }, setCancel] = useState({ cancel: () => {} })
 
   useEffect(() => {
-      const cancel = nodeController.getNodesByTopic('blender')
-      setCancel({ cancel })
+    const cancel = nodeController.getNodesByTopic('blender')
+    setCancel({ cancel })
   }, [])
 
   if (nodeController.store.state === States.LOADING) {

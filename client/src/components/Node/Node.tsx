@@ -25,7 +25,7 @@ const Node:FunctionComponent<Props> = observer(({
       onKeyDown={onEnter}
     >
       <div className="title">
-        <h4>{data.title}</h4>
+        <h5>{data.title}</h5>
       </div>
       <img src={thumbnail} />
     </div>

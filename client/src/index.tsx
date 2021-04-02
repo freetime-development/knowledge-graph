@@ -1,8 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
+import { createMuiTheme, StylesProvider, ThemeProvider } from '@material-ui/core/styles'
 
 import { Routes } from './conf'
+import NavBar from './components/NavBar/NavBar'
 import App from './pages/App/App'
 import Note from './pages/Note/Note'
 
@@ -19,13 +21,28 @@ window.addEventListener('error', (event) => {
   console.log(event)
 })
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#f5f5f5'
+    }
+  },
+  overrides: {
+  }
+})
+
 ReactDOM.render(
   <BrowserRouter>
-    <Switch>
-      <Route path={Routes.ROOT} exact component={App} />
-      <Route path={Routes.NOTE} exact component={Note} />
-      <Redirect to={Routes.ROOT} />
-    </Switch>
+    <StylesProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <NavBar />
+        <Switch>
+          <Route path={Routes.ROOT} exact component={App} />
+          <Route path={Routes.NOTE} exact component={Note} />
+          <Redirect to={Routes.ROOT} />
+        </Switch>
+      </ThemeProvider>
+    </StylesProvider>
   </BrowserRouter>,
   document.getElementById('app')
 )

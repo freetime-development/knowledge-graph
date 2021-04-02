@@ -20,7 +20,7 @@ const Sidebar: FunctionComponent<Props> = ({ open, setOpen, children, width }) =
       open={open}
       onClose={setOpen}
       variant="persistent"
-      PaperProps={{ style: { top: '64px' } }}
+      PaperProps={{ style: { top: '76px' } }}
     >
       <div className={classes.list} role="presentation">
         <Container maxWidth="lg" className="page">

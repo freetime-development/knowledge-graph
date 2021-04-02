@@ -1,6 +1,8 @@
 .content-node {
+  display: flex;
+  flex-direction: column;
   cursor: pointer;
-  width: 320px;
+  width: 200px;
   margin: 10px;
   box-shadow: -5px -5px 5px 0 rgba(35,35,35,1), 5px 5px 5px 0 rgba(0,0,0,.3);
   box-shadow: -5px -5px 5px 0 rgba(255,255,255,.3), 5px 5px 5px 0 rgba(235,235,235,1);
@@ -10,10 +12,10 @@
 
 .content-node .title {
   /* color: whitesmoke; */
-  padding-bottom: 7px;
+  margin: 7px 0;
 }
 
-.content-node h4 {
+.content-node h5 {
   margin: 0;
 }
 
