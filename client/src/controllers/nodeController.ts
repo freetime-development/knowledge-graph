@@ -18,7 +18,7 @@ export default class NodeController {
     const previousValue = this.store.nodes
 
     response.then((response) => {
-      this.store.setNodes(response.data.payload)
+      this.store.setNodes(response.data)
     }).catch((error) => {
       this.store.setError("GetNodesByTopic Error")
       console.log('GetNodesByTopic Error', error)

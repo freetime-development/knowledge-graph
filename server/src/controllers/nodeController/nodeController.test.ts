@@ -5,7 +5,7 @@ const sinonChai = require("sinon-chai");
 import NodeController from '../../controllers/nodeController/nodeController'
 import NodeRepository from '../../repositories/nodeRepository/nodeRepository'
 import { mockNode } from '../../mocks/nodes'
-import { httpMock, Message } from '../../util';
+import { httpMock } from '../../util';
 
 chai.use(sinonChai)
 const { expect } = chai
@@ -21,19 +21,17 @@ describe('NODE CONTROLLER UNIT TEST', function() {
               nodeId: 42
             }
         })
-        const msg = new Message(true, [mockNode])
-
         expect(repository.getByTopic).to.exist
-        sinon.stub(repository, 'getByTopic').resolves(msg)
+        sinon.stub(repository, 'getByTopic').resolves([mockNode])
 
         const controller = new NodeController(repository)
         sinon.spy(controller, 'getNodesByTopic')
-     
+
         await controller.getNodesByTopic(request, response)
         const data = response._getData()
 
         expect(controller.getNodesByTopic).to.have.been.calledWith(request, response)
-        expect(data).to.eql(JSON.stringify(msg))
+        expect(data).to.eql(JSON.stringify([mockNode]))
     })
 
     it("should call setNode method on NodeController", async function() {
@@ -42,19 +40,17 @@ describe('NODE CONTROLLER UNIT TEST', function() {
             url: '/nodes/set',
             payload: mockNode
         })
-        const msg = new Message(true)
-
         expect(repository.set).to.exist
-        sinon.stub(repository, 'set').resolves(msg)
+        sinon.stub(repository, 'set').resolves()
 
         const controller = new NodeController(repository)
         sinon.spy(controller, 'setNode')
-     
+
         await controller.setNode(request, response)
         const data = response._getData()
 
         expect(controller.setNode).to.have.been.calledWith(request, response)
-        expect(data).to.eq(JSON.stringify(msg))
+        expect(data).to.eq('')
     })
 })
 

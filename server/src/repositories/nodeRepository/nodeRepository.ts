@@ -1,8 +1,6 @@
 import * as dgraph from 'dgraph-js'
 import * as grpc from 'grpc'
 import { Node } from '../../interface'
-import { Message } from '../../util'
-
 interface Options {
   address: string
   credentials: any // TODO add correct type when we know what secure channel we gonna use
@@ -18,8 +16,7 @@ class NodeRepository {
     this.client = new dgraph.DgraphClient(clientStub)
   }
 
-  async getByTopic(topic: string): Promise<Message<Node[]>> {
-    const message: Message<Node[]> = new Message()
+  async getByTopic(topic: string): Promise<Node[]> {
     const txn = this.client.newTxn()
     const query = `
       query byTopic($topic: string) {
@@ -42,18 +39,15 @@ class NodeRepository {
       const res = await txn.queryWithVars(query, vars)
       const result: Node[] = res.getJson()['byTopic']
 
-      message.setResult(result)
+      return result
     } catch(error) {
-      message.setError(error)
+      throw new Error('Could not get nodes byTopic')
     } finally {
       await txn.discard()
     }
-
-    return message
   }
 
-  async set(nodeData: Node): Promise<Message<null>> {
-    const message: Message<null> = new Message()
+  async set(nodeData: Node): Promise<void> {
     const txn = this.client.newTxn()
     try {
       const mutation = new dgraph.Mutation()
@@ -62,20 +56,16 @@ class NodeRepository {
 
       console.log('nodeData', nodeData)
       await txn.mutate(mutation)
-
-      message.setResult(null)
     } catch (error) {
-      message.setError(error)
       console.log(error)
     } finally {
       await txn.discard()
     }
 
-    return message
+    return
   }
 
-  async delete(uid: string): Promise<Message<null>> {
-    const message: Message<null> = new Message()
+  async delete(uid: string): Promise<void> {
     const txn = this.client.newTxn()
     try {
       const mutation = new dgraph.Mutation()
@@ -83,16 +73,13 @@ class NodeRepository {
       mutation.setCommitNow(true)
 
       await txn.mutate(mutation)
-
-      message.setResult(null)
     } catch (error) {
-      message.setError(error)
       console.log(error)
     } finally {
       await txn.discard()
     }
 
-    return message
+    return
   }
 }
 
