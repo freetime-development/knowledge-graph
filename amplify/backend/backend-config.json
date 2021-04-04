@@ -1,6 +1,6 @@
 {
   "auth": {
-    "knowledgegraph2536b629": {
+    "knowledgegraph4c2dde93": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],

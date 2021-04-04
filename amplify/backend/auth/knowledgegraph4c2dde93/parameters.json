@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "knowledgegraph2536b629_identitypool_2536b629",
+    "identityPoolName": "knowledgegraph4c2dde93_identitypool_4c2dde93",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "knowle2536b629",
-    "userPoolName": "knowledgegraph2536b629_userpool_2536b629",
+    "resourceNameTruncated": "knowle4c2dde93",
+    "userPoolName": "knowledgegraph4c2dde93_userpool_4c2dde93",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -18,8 +18,7 @@
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
     "requiredAttributes": [
-        "email",
-        "name"
+        "email"
     ],
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
@@ -29,10 +28,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "knowle2536b629_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "knowle4c2dde93_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "2536b629",
-    "resourceName": "knowledgegraph2536b629",
+    "sharedId": "4c2dde93",
+    "resourceName": "knowledgegraph4c2dde93",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -48,7 +47,7 @@
     },
     "useDefault": "default",
     "usernameAttributes": [
-        "email, phone_number"
+        "email"
     ],
     "triggers": "{}",
     "userPoolGroupList": [],

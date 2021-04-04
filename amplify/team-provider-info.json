@@ -1,26 +1,26 @@
 {
-    "dev": {
-        "awscloudformation": {
-            "AuthRoleName": "amplify-knowledgegraph-dev-214223-authRole",
-            "UnauthRoleArn": "arn:aws:iam::726076275745:role/amplify-knowledgegraph-dev-214223-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::726076275745:role/amplify-knowledgegraph-dev-214223-authRole",
-            "Region": "eu-central-1",
-            "DeploymentBucketName": "amplify-knowledgegraph-dev-214223-deployment",
-            "UnauthRoleName": "amplify-knowledgegraph-dev-214223-unauthRole",
-            "StackName": "amplify-knowledgegraph-dev-214223",
-            "StackId": "arn:aws:cloudformation:eu-central-1:726076275745:stack/amplify-knowledgegraph-dev-214223/e20e4a10-957d-11eb-bcf0-0a9492ef672c",
-            "AmplifyAppId": "d1u1uj0y0atdr7"
-        },
-        "categories": {
-            "auth": {
-                "knowledgegraph2536b629": {}
-            },
-            "hosting": {
-                "amplifyhosting": {
-                    "appId": "d1u1uj0y0atdr7",
-                    "type": "cicd"
-                }
-            }
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-knowledgegraph-dev-214223-authRole",
+      "UnauthRoleArn": "arn:aws:iam::726076275745:role/amplify-knowledgegraph-dev-214223-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::726076275745:role/amplify-knowledgegraph-dev-214223-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-knowledgegraph-dev-214223-deployment",
+      "UnauthRoleName": "amplify-knowledgegraph-dev-214223-unauthRole",
+      "StackName": "amplify-knowledgegraph-dev-214223",
+      "StackId": "arn:aws:cloudformation:eu-central-1:726076275745:stack/amplify-knowledgegraph-dev-214223/e20e4a10-957d-11eb-bcf0-0a9492ef672c",
+      "AmplifyAppId": "d1u1uj0y0atdr7"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d1u1uj0y0atdr7",
+          "type": "cicd"
         }
+      },
+      "auth": {
+        "knowledgegraph4c2dde93": {}
+      }
     }
+  }
 }
