@@ -8,6 +8,10 @@ import NavBar from './components/NavBar/NavBar'
 import App from './pages/App/App'
 import Note from './pages/Note/Note'
 
+import Amplify from "aws-amplify";
+import awsExports from "./aws-exports";
+import { withAuthenticator } from '@aws-amplify/ui-react'
+Amplify.configure(awsExports);
 
 window.onerror = (message, source, lineno, colno, error) => {
   console.log("Boom-sync", message, source, lineno, colno, error)
@@ -31,8 +35,9 @@ const theme = createMuiTheme({
   }
 })
 
-ReactDOM.render(
-  <BrowserRouter>
+const RootComponent = withAuthenticator(() => {
+  return (
+    <BrowserRouter>
     <StylesProvider injectFirst>
       <ThemeProvider theme={theme}>
         <NavBar />
@@ -40,9 +45,14 @@ ReactDOM.render(
           <Route path={Routes.ROOT} exact component={App} />
           <Route path={Routes.NOTE} exact component={Note} />
           <Redirect to={Routes.ROOT} />
-        </Switch>
+      </Switch>
       </ThemeProvider>
     </StylesProvider>
-  </BrowserRouter>,
+  </BrowserRouter>
+  )
+})
+
+ReactDOM.render(
+  <RootComponent />,
   document.getElementById('app')
 )
