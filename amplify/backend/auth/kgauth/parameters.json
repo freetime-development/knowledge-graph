@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "knowledgegraph4c2dde93_identitypool_4c2dde93",
+    "identityPoolName": "kgauthidentitypool",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "knowle4c2dde93",
-    "userPoolName": "knowledgegraph4c2dde93_userpool_4c2dde93",
+    "resourceNameTruncated": "knowle58658471",
+    "userPoolName": "kguserpool",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -23,15 +23,19 @@
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [
+        "name",
+        "picture",
         "email"
     ],
     "userpoolClientReadAttributes": [
-        "email"
+        "email",
+        "name",
+        "picture"
     ],
-    "userpoolClientLambdaRole": "knowle4c2dde93_userpoolclient_lambda_role",
-    "userpoolClientSetAttributes": false,
-    "sharedId": "4c2dde93",
-    "resourceName": "knowledgegraph4c2dde93",
+    "userpoolClientLambdaRole": "kgauth58658471_userpoolclient_lambda_role",
+    "userpoolClientSetAttributes": true,
+    "sharedId": "58658471",
+    "resourceName": "kgauth",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -45,12 +49,23 @@
             "Arn"
         ]
     },
-    "useDefault": "default",
+    "useDefault": "manual",
+    "thirdPartyAuth": true,
+    "authProviders": [],
     "usernameAttributes": [
         "email"
     ],
+    "userPoolGroups": true,
+    "adminQueries": false,
     "triggers": "{}",
-    "userPoolGroupList": [],
+    "hostedUI": true,
+    "hostedUIDomainName": "test",
+    "authProvidersUserPool": [],
+    "hostedUIProviderMeta": "[]",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"implicit\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:2000/\"],\"LogoutURLs\":[\"http://localhost:2000/\"]}",
+    "userPoolGroupList": [
+        "userpoolgroup"
+    ],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
     "parentStack": {

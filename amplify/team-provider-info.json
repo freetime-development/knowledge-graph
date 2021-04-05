@@ -19,7 +19,8 @@
         }
       },
       "auth": {
-        "knowledgegraph4c2dde93": {}
+        "knowledgegraph4c2dde93": {},
+        "kgauth": {}
       }
     }
   }
