@@ -1,5 +1,12 @@
 {
-  "auth": {},
+  "auth": {
+    "knowledgegraph0e34ef53": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  },
   "hosting": {
     "amplifyhosting": {
       "service": "amplifyhosting",
