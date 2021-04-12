@@ -58,6 +58,6 @@
     "dependsOn": [],
     "thirdPartyAuth": false,
     "userPoolGroups": false,
-    "adminQueries": true,
+    "adminQueries": false,
     "authProviders": []
 }
