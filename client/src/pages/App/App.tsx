@@ -11,7 +11,7 @@ import './app.css'
 
 
 const App: FunctionComponent<{}> = observer(() => {
-  const { nodeController } = useController()
+  const { nodeController, userController } = useController()
   const [{ cancel }, setCancel] = useState({ cancel: () => {} })
 
   useEffect(() => {
@@ -19,7 +19,11 @@ const App: FunctionComponent<{}> = observer(() => {
     setCancel({ cancel })
   }, [])
 
-  if (nodeController.store.state === States.LOADING) {
+  useEffect(() => {
+    userController.getLoggedInUser()
+  }, [])
+
+  if (nodeController.store.state === States.LOADING || userController.store.state === States.LOADING) {
     return (
       <Backdrop open>
         <CircularProgress />

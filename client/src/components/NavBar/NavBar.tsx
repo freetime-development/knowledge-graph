@@ -6,20 +6,24 @@ import { AccountCircle } from "@material-ui/icons"
 import styles from './navbar.styles'
 import { Link } from "react-router-dom"
 import { Routes } from "../../conf"
+import { AmplifySignOut } from "@aws-amplify/ui-react"
+import { useController } from "../../store"
+import { observer } from "mobx-react-lite"
 
-const NavBar: FunctionComponent<{}> = ({}) => {
+const NavBar: FunctionComponent<{}> = observer(({}) => {
+  const { userController } = useController()
   const classes = styles()
   const isLoggedIn = true
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
+  const [anchorEl, setAnchorEl] = React.useState(null)
+  const open = Boolean(anchorEl)
 
   const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+    setAnchorEl(event.currentTarget)
+  }
 
   const handleClose = () => {
-    setAnchorEl(null);
-  };
+    setAnchorEl(null)
+  }
 
   return (
     <AppBar position="static" className={classes.root}>
@@ -46,6 +50,7 @@ const NavBar: FunctionComponent<{}> = ({}) => {
                 onClick={handleMenu}
                 color="inherit"
               >
+                {userController.store.user?.username}
                 <AccountCircle />
               </IconButton>
               <Menu
@@ -65,12 +70,15 @@ const NavBar: FunctionComponent<{}> = ({}) => {
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem>
+                  <AmplifySignOut />
+                </MenuItem>
               </Menu>
             </div>
           )}
         </Toolbar>
       </AppBar>
   )
-}
+})
 
 export default NavBar
