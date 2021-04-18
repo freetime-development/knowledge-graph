@@ -9,20 +9,39 @@ interface Props {
   open: boolean
   setOpen(open: boolean): void
   children: JSX.Element[] | JSX.Element
+  anchor?: 'left' | 'right' | 'top' | 'bottom'
 }
 
-const Sidebar: FunctionComponent<Props> = ({ open, setOpen, children, width }) => {
+const Sidebar: FunctionComponent<Props> = ({ open, setOpen, children, width, anchor = 'left'}) => {
   const classes = styles({ width })
+
+  function getPaperProps () {
+    if (getOrientation() === 'vertical') {
+      return {
+        style: { top: '76px' }
+      }
+    }
+
+    return {}
+  }
+
+  function getOrientation() {
+    if (anchor === 'left' || anchor === 'right') {
+      return 'vertical'
+    } else {
+      return 'horizontal'
+    }
+  }
 
   return (
     <Drawer
-      anchor='right'
+      anchor={anchor}
       open={open}
       onClose={setOpen}
       variant="persistent"
-      PaperProps={{ style: { top: '76px' } }}
+      PaperProps={getPaperProps()}
     >
-      <div className={classes.list} role="presentation">
+      <div className={getOrientation() === 'vertical' ? classes.list : null} role="presentation">
         <Container maxWidth="lg" className="page">
           {children}
         </Container>

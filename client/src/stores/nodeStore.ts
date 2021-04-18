@@ -1,5 +1,5 @@
-import { makeAutoObservable } from "mobx";
-import { Node } from "../interface";
+import { makeAutoObservable, reaction } from "mobx";
+import { Link, Node } from "../interface";
 
 export enum States {
   IDLE, LOADING, SUCCESS, ERROR
@@ -7,6 +7,7 @@ export enum States {
 
 export default class NodeStore {
   nodes: Node[] = []
+  links: Link[] = []
   error: string = ''
   state: States = States.LOADING
 
@@ -16,6 +17,9 @@ export default class NodeStore {
 
   setNodes = (nodes: Node[]) => {
     this.nodes = nodes
+    if (!this.links.length) {
+      this.links = []
+    }
     this.setState(States.SUCCESS)
   }
 
@@ -26,5 +30,9 @@ export default class NodeStore {
 
   setState = (state: States) => {
     this.state = state
+  }
+
+  addLink = (link: Link) => {
+    this.links.push(link)
   }
 }

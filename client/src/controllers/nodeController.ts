@@ -1,6 +1,6 @@
+import { Link, Node } from "../interface";
 import NodeService from "../services/nodeService";
 import NodeStore, { States } from "../stores/nodeStore";
-
 
 export default class NodeController {
   store: NodeStore
@@ -29,6 +29,10 @@ export default class NodeController {
       this.store.setError("GetNodesByTopic Error")
       this.store.setState(States.IDLE)
     }
+  }
+
+  addLink = (link: Link) => {
+    this.store.addLink(link)
   }
 }
 

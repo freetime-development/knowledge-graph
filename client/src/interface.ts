@@ -23,3 +23,11 @@ export interface Node {
   embedUrl?: string
   text?: string
 }
+
+export interface Link {
+  label: string
+  source: Node
+  target: Node
+  direction?: number // -1 | 0 | 1
+  rotation?: number
+}

@@ -1,10 +1,10 @@
 body {
-    /* background: rgba(25, 25, 25, 1) */
-    background: whitesmoke
+  /* background: rgba(25, 25, 25, 1) */
+  background: whitesmoke
 }
 
 .nodes {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
